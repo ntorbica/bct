@@ -100,10 +100,8 @@ bct.ancova <- function(peaks, info, minQC = 4, condition = c("", 0, 1, 2, "c"), 
                     "\timputation value:\t", ifelse(is.null(actual$impV), 'none', actual$impV), "\n",
                     "\tstrategy:\t\t", actual$str),
                 side = 'none')
-
-
-        # Now we are set for batch correction.  ANCOVA type correction:
-
+                        
+        # Apply batch correction
         D.A <- apply(set.1, 2,
                      doBC,
                      ref.idx = as.numeric(refSamples[[actual$str]]),
