@@ -1,2 +1,2 @@
 # bct
-Batch effect correction for untargeted LC-MS data
+Batch correction tool for removal of batch effects correction for untargeted LC-MS data
