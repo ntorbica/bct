@@ -322,9 +322,7 @@ BCT <- function() {
                                                 minQC = arguments$minQC,
                                                 condition = arguments$condition,
                                                 method = arguments$method,
-                                                QC = arguments$QC,
-                                                PCA = arguments$PCA,
-                                                Duplo = arguments$Duplo))
+                                                QC = arguments$QC))
 
     rownames(data.out$P.nc) <- rownames(data.out$P)
 
