@@ -4,7 +4,7 @@ Batch correction tool for removal of batch effects correction for untargeted LC-
 
 To install this package in R, type the following in a R console or RStudio:
 
-install.packages("devtools")
+install.packages("devtools") <----- Only required if the devtools package has not been previously installed
 
 library(devtools)
 
