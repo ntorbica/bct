@@ -5,5 +5,6 @@ To install this package in R, type the following in a R console or RStudio:
 
 install.packages("devtools")
 
-install_github("ntorbica/bct")
+library(devtools)
 
+install_github("ntorbica/bct/bct")
