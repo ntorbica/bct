@@ -7,4 +7,4 @@ install.packages("devtools")
 
 library(devtools)
 
-install_github("ntorbica/bct/package")
+install_github("ntorbica/bct/Package")
