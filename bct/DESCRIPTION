@@ -13,5 +13,6 @@ Encoding: UTF-8
 LazyData: true
 Depends: grid, gridBase, gridExtra, svMisc, ggplot2, reshape2, 
 	tcltk,  tcltk2, gplots, tools, ChemometricsWithR,
-	data.table, BatchCorrMetabolomics
+	data.table.
+Remotes: url::https://github.com/rwehrens/BatchCorrectionMethods
 RoxygenNote: 6.0.1
