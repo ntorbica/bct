@@ -13,6 +13,6 @@ Encoding: UTF-8
 LazyData: true
 Depends: grid, gridBase, gridExtra, svMisc, ggplot2, reshape2, 
 	tcltk,  tcltk2, gplots, tools, ChemometricsWithR,
-	data.table
-Remotes: rwehrens/BatchCorrMetabolomics, drisso/RUVSeq
+	data.table, rwehrens/BatchCorrMetabolomics, drisso/RUVSeq
+ 
 RoxygenNote: 6.0.1
