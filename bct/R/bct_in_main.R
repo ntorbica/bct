@@ -37,7 +37,7 @@ bct.in.main <- function(){
 
 # Input Args --------------------------------------------------------------
 ##############
-  bct.in.args(QC)
+  bct.in.args()
 
   if(cancelled){
     sq <- function(){
