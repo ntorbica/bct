@@ -9,4 +9,4 @@ library(devtools)
 install_github("ntorbica/bct/Package")
 
 
-A user manual is in production. 
+A user manual is in production. Supplementary material, such as example data or descriptions, are found in the 'Data' directory.
