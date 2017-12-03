@@ -12,7 +12,6 @@ License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Depends: grid, gridBase, gridExtra, svMisc, ggplot2, reshape2, 
-	tcltk,  tcltk2, gplots, tools, ChemometricsWithR,
-	data.table, BatchCorrMetabolomics
+	tcltk2, gplots, tools, ChemometricsWithR, data.table, BatchCorrMetabolomics
 Remotes: rwehrens/BatchCorrMetabolomics
 RoxygenNote: 6.0.1
