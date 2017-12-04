@@ -21,10 +21,9 @@ BCT(gui = F)
 
 It is also advised to save the pipeline output to a variable:
 
-bct.results <- BCT()
+results.BCT <- BCT()
 
 This produces three list elements in the output variable, with one containing the data how it is passed during pipeline execution (DATA), one containing the formatted data that is outputted at the end of the pipeline (DATA.FORMATTED), and one containing the inputs given at the beginning of the pipeline and some additional information determined during the pipeline (ARGS).
-
 
 
 A user manual is in production. Supplementary material, such as example data or descriptions, are found in the 'Data' directory.
