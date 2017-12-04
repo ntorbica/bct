@@ -12,7 +12,7 @@
 #'   are saved as .csv files; and ARGS, containing the input arguments as well as
 #'   arguments added during the execution.
 
-BCT <- function(gui = T) {
+BCT <- function(gui = F) {
 
 # User Input --------------------------------------------------------------
 
