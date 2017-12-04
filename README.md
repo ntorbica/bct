@@ -11,4 +11,16 @@ library(devtools)
 install_github("ntorbica/bct/Package")
 
 
+The pipeline is launched as follows:
+
+BCT(gui = T)
+This command calls the pipeline with a tcl/tk guided user interface (gui). If the pipeline fails, it is recommended to launch the pipeline with terminal inputting:
+
+BCT(gui = F)
+It is also advised to save the pipeline output to a variable:
+
+bct.results <- BCT()
+
+
+
 A user manual is in production. Supplementary material, such as example data or descriptions, are found in the 'Data' directory.
