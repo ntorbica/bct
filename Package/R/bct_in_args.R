@@ -278,7 +278,7 @@ bct.in.args <- function(){
     O4 <- tk2checkbutton(tt$env$main$top$opt$t, text = 'Corrected -> Normalized')
     O5 <- tk2checkbutton(tt$env$main$top$opt$t, text = 'Normalized -> Corrected')
 
-    preset <- tk2checkbutton(tt$env$main$top$opt$t, text = 'Save BCT options to file')
+    # preset <- tk2checkbutton(tt$env$main$top$opt$t, text = 'Save BCT options to file')
 
 
     O1Val <- tclVar("0")
@@ -287,7 +287,7 @@ bct.in.args <- function(){
     O4Val <- tclVar("0")
     O5Val <- tclVar("0")
 
-    presetVal <- tclVar("0")
+    # presetVal <- tclVar("0")
 
     tkconfigure(O1, variable = O1Val)
     tkconfigure(O2, variable = O2Val)
@@ -295,7 +295,7 @@ bct.in.args <- function(){
     tkconfigure(O4, variable = O4Val)
     tkconfigure(O5, variable = O5Val)
 
-    tkconfigure(preset, variable = presetVal)
+    # tkconfigure(preset, variable = presetVal)
 
     tkgrid(O1, columnspan = 1, sticky = 'w')
     tkgrid(O2, columnspan = 1, sticky = 'w')
@@ -304,8 +304,8 @@ bct.in.args <- function(){
     tkgrid(O5, columnspan = 1, sticky = 'w')
     tkgrid(tk2label(tt$env$main$top$opt$t, text = ''), sticky = 'n')
 
-    tkgrid(preset, columnspan = 1, sticky = 'w')
-    tkgrid(tk2label(tt$env$main$top$opt$t, text = ''), sticky = 'n')
+    # tkgrid(preset, columnspan = 1, sticky = 'w')
+    # tkgrid(tk2label(tt$env$main$top$opt$t, text = ''), sticky = 'n')
 
 
 
@@ -406,7 +406,7 @@ bct.in.args <- function(){
       assign("o4", tclvalue(O4Val), envir = .GlobalEnv)
       assign("o5", tclvalue(O5Val), envir = .GlobalEnv)
 
-      assign("preset", tclvalue(presetVal), envir = .GlobalEnv)
+      # assign("preset", tclvalue(presetVal), envir = .GlobalEnv)
 
       assign("cancelled", FALSE, envir = .GlobalEnv)
 
