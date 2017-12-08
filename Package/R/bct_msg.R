@@ -30,7 +30,7 @@ bct.msg <- function(msg, side = c('both', 'top', 'bottom', 'none')){
   }
 
   if(side == 'none'){
-    cat('\n')
+    cat('\n\n')
     cat(msg, '\n\n')
   }
 }
