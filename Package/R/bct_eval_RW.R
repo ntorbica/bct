@@ -66,7 +66,7 @@ bct.eval_RW <- function(peaks, info, arguments, plot.pca = F, plot.rep = F, plot
     pval <- NULL
   }
   par(oma = c(0, 1.5, 0, 0))
-  mtext(n, side = 3, outer = T, line = -2.5, adj = c(0, -0.5), padj = c(1, 2), cex = 2)
+  mtext(n, side = 3, outer = T, line = -2.5, adj = c(0, -0.5), cex = 1.2)
 
   return(out)
 
