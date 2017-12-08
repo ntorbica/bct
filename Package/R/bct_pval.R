@@ -197,3 +197,4 @@ bct.pval <- function(peaks, info, PLOT = TRUE, PDF = FALSE, csv = FALSE, t = "",
   cat("\nComputations complete!\n")
   return(p.ALL)
 }
+
