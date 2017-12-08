@@ -16,26 +16,58 @@
 #'   injection sequence and batch labels.
 #' @return Returns a list object with the values specified in the arguments object.
 
-bct.eval_RW <- function(peaks, info, arguments, plot.pca = F, plot.rep = F, plot.pdist = F, n = ''){
+bct.eval_RW <- function(peaks, info, arguments, plot.pca = F, plot.rep = F, plot.pdist = F,
+                        n = '', adj = F, dens = F){
 
-  if(arguments$PCA == '1'){
-    pca <- evaluatePCA(peaks, info, plot = plot.pca, main = n, perBatch = F)
+  out <- list()
+
+  if(arguments$PCA == arguments$Duplo){
+    layout(matrix(c(1,1,3,1,1,4,2,2,5), 3, 3, byrow = T))
+    par(mar = c(4,5,6.5,4))
+    pca <- evaluatePCA(peaks, info, plot = plot.pca, perBatch = F)
+    out[["Bhattacharyya Distance"]] <- pca
+    title(paste("Bhattacharyya Distance: ", round(pca, 3), sep = ''))
+    par(mar = c(6,6,5,6))
+    dup <- evaluateDuplos(peaks, info, plot = plot.rep, breaks = 20, xlim = c(0,1))
+    out[["Repeatabilities"]] <- dup
+    title('Feature Repeatability')
+    legend(x = 'topright', legend = paste('Mean Rep: ', round(mean(dup, na.rm = T), 3), sep = ''))
+
   } else {
-    pca <- NULL
+    layout(matrix(c(1,1,2,1,1,3,1,1,4), 3, 3, byrow = T))
+    if(arguments$PCA == '1'){
+      par(mar = c(4,5,6.5,4))
+      pca <- evaluatePCA(peaks, info, plot = plot.pca, perBatch = F)
+      title(paste("Bhattacharyya Distance: ", round(pca, 3), sep = ''))
+      out[["Bhattacharyya Distance"]] <- pca
+    }
+    if(arguments$Duplo == '1'){
+      par(mar = c(6,6,5,6))
+      dup <- evaluateDuplos(peaks, info, plot = plot.rep, breaks = 20, xlim = c(0,1))
+      title('Feature Repeatability')
+      legend(x = 'topright', legend = paste('Mean Rep: ', round(mean(dup, na.rm = T), 3), sep = ''))
+      out[["Repeatabilities"]] <- dup
+    }
   }
 
-  if(arguments$Duplo == '1'){
-    dup <- evaluateDuplos(peaks, info, plot = plot.rep)
-  } else {
-    dup <- NULL
-  }
 
   if(arguments$pdist == '1'){
-    pval <- bct.pval(peaks, info, PLOT = plot.pdist, t = '', plotn = 'Batch')
+    par(mar = c(6,4,6,4))
+    pval.b <- bct.pval(peaks, info, PLOT = plot.pdist, t = '',
+                       plotn = 'Batch', adj = adj, dens = dens)
+    pval.g <- bct.pval(peaks, info, PLOT = plot.pdist, t = '',
+                       plotn = 'Group', adj = adj, dens = dens)
+    pval.s <- bct.pval(peaks, info, PLOT = plot.pdist, t = '',
+                       plotn = 'SeqNr', adj = adj, dens = dens)
+    out[["P-value distributions"]] <- list("Batch" = pval.b,
+                                           "Group" = pval.g,
+                                           "Order" = pval.s)
   } else {
     pval <- NULL
   }
 
-  return(list('Bhatt. Dist PC1 vs PC2' = pca, "Repeatabilities" = dup, "P-value distributions" = pval))
+  mtext(n, side = 3, outer = T, line = -2, adj = -1)
+
+  return(out)
 
 }
