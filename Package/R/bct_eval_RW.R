@@ -20,14 +20,17 @@ bct.eval_RW <- function(peaks, info, arguments, plot.pca = F, plot.rep = F, plot
                         n = '', adj = F, dens = F){
 
   out <- list()
-
+  bct.msg('Plotting...', side = 'top')
   if(arguments$PCA == arguments$Duplo){
+
     layout(matrix(c(1,1,3,1,1,4,2,2,5), 3, 3, byrow = T))
     par(mar = c(4,5,6.5,4))
+    bct.msg('PCA...', side = 'none')
     pca <- evaluatePCA(peaks, info, plot = plot.pca, perBatch = F)
     out[["Bhattacharyya Distance"]] <- pca
-    title(paste("Bhattacharyya Distance: ", round(pca, 3), sep = ''))
+    title(paste("Bhattacharyya Distance: ", round(pca, 3), sep = ''), cex.main = 2)
     par(mar = c(6,6,5,6))
+    bct.msg('Repeatabilities...', side = 'none')
     dup <- evaluateDuplos(peaks, info, plot = plot.rep, breaks = 20, xlim = c(0,1))
     out[["Repeatabilities"]] <- dup
     title('Feature Repeatability')
@@ -37,12 +40,14 @@ bct.eval_RW <- function(peaks, info, arguments, plot.pca = F, plot.rep = F, plot
     layout(matrix(c(1,1,2,1,1,3,1,1,4), 3, 3, byrow = T))
     if(arguments$PCA == '1'){
       par(mar = c(4,5,6.5,4))
+      bct.msg('PCA...', side = 'none')
       pca <- evaluatePCA(peaks, info, plot = plot.pca, perBatch = F)
-      title(paste("Bhattacharyya Distance: ", round(pca, 3), sep = ''))
+      title(paste("Bhattacharyya Distance: ", round(pca, 3), sep = ''), cex.main = 2)
       out[["Bhattacharyya Distance"]] <- pca
     }
     if(arguments$Duplo == '1'){
       par(mar = c(6,6,5,6))
+      bct.msg('Repeatabilities...', side = 'none')
       dup <- evaluateDuplos(peaks, info, plot = plot.rep, breaks = 20, xlim = c(0,1))
       title('Feature Repeatability')
       legend(x = 'topright', legend = paste('Mean Rep: ', round(mean(dup, na.rm = T), 3), sep = ''))
@@ -53,6 +58,7 @@ bct.eval_RW <- function(peaks, info, arguments, plot.pca = F, plot.rep = F, plot
 
   if(arguments$pdist == '1'){
     par(mar = c(6,4,6,4))
+    bct.msg('P-values...', side = 'none')
     pval.b <- bct.pval(peaks, info, PLOT = plot.pdist, t = '',
                        plotn = 'Batch', adj = adj, dens = dens)
     pval.g <- bct.pval(peaks, info, PLOT = plot.pdist, t = '',
@@ -65,9 +71,10 @@ bct.eval_RW <- function(peaks, info, arguments, plot.pca = F, plot.rep = F, plot
   } else {
     pval <- NULL
   }
-  par(oma = c(0, 1.5, 0, 0))
-  mtext(n, side = 3, outer = T, line = -2.5, adj = c(0, -0.5), cex = 1.2)
+  par(oma = c(0,1,0,0))
+  mtext(n, side = 3, outer = T, line = -2.5, adj = c(0,-0.5), cex = 1.2)
 
+  bct.msg('Done!', side = 'bottom')
   return(out)
 
 }
