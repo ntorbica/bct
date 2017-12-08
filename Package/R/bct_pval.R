@@ -68,7 +68,7 @@ bct.pval <- function(peaks, info, PLOT = TRUE, PDF = FALSE, csv = FALSE, t = "",
            probability = F, breaks = 20)
       abline(v = median(groupp), lty = 3, col = "red")
       if(dens){
-        lines(density(groupp)*20, col = 'blue', lty = 1, lwd = 2)
+        lines(density(groupp), col = 'blue', lty = 1, lwd = 2)
       }
       legend(x = 'topright', legend(paste("median: ", round(median(groupp), 3))))
 
@@ -86,7 +86,7 @@ bct.pval <- function(peaks, info, PLOT = TRUE, PDF = FALSE, csv = FALSE, t = "",
            probability = F, breaks = 20)
       abline(v = median(timep), lty = 3, col = "red")
       if(dens){
-        lines(density(timep)*20, col = 'blue', lty = 1, lwd = 2)
+        lines(density(timep), col = 'blue', lty = 1, lwd = 2)
       }
       legend(x = 'topright', legend(paste("median: ", round(median(timep), 3))))
 
@@ -98,7 +98,7 @@ bct.pval <- function(peaks, info, PLOT = TRUE, PDF = FALSE, csv = FALSE, t = "",
              probability = F, breaks = 20)
         abline(v = median(allpadjcb$groupp), lty = 3, col = "red")
         if(dens){
-          lines(density(allpadjcb$groupp)*20, col = 'blue', lty = 1, lwd = 2)
+          lines(density(allpadjcb$groupp), col = 'blue', lty = 1, lwd = 2)
         }
         legend(x = 'topright', legend = paste("median: ", round(median(alladj$groupp), 3)))
 
@@ -107,16 +107,16 @@ bct.pval <- function(peaks, info, PLOT = TRUE, PDF = FALSE, csv = FALSE, t = "",
              probability = F, breaks = 20)
         abline(v = median(allpadjcb$sitep), lty = 3, col = "red")
         if(dens){
-          lines(density(allpadjcb$sitep)*20, col = 'blue', lty = 1, lwd = 2)
+          lines(density(allpadjcb$sitep), col = 'blue', lty = 1, lwd = 2)
         }
         legend(x = 'topright', legend = paste("median: ", round(median(alladj$sitep), 3)))
 
 
         hist(allpadjcb$timep, main = paste(t, "Order adj"), xlab = "P-Value", cex = 3, xlim = c(0,1),
              probability = F, breaks = 20)
-        abline(v = median(allpadjcb$timep)*20, lty = 3, col = "red")
+        abline(v = median(allpadjcb$timep), lty = 3, col = "red")
         if(dens){
-          lines(density(allpadjcb$timep)*20, col = 'blue', lty = 1, lwd = 2)
+          lines(density(allpadjcb$timep), col = 'blue', lty = 1, lwd = 2)
         }
         legend(x = 'topright', legend = paste("median: ", round(median(alladj$timep), 3)))
       }
@@ -131,7 +131,7 @@ bct.pval <- function(peaks, info, PLOT = TRUE, PDF = FALSE, csv = FALSE, t = "",
              probability = F, breaks = 20)
         abline(v = median(groupp), lty = 2, col = "red")
         if(dens){
-          d <- density(groupp)*20
+          d <- density(groupp)
           lines(d, col = 'blue', lty = 1, lwd = 2)
         }
         legend(x = 'topright', legend = paste("median: ", round(median(groupp), 3)))
@@ -142,7 +142,7 @@ bct.pval <- function(peaks, info, PLOT = TRUE, PDF = FALSE, csv = FALSE, t = "",
              probability = F, breaks = 20)
         abline(v = median(sitep), lty = 2, col = "red")
         if(dens){
-          lines(density(sitep)*20, col = 'blue', lty = 1, lwd = 2)
+          lines(density(sitep), col = 'blue', lty = 1, lwd = 2)
         }
         legend(x = 'topright', legend = paste("median: ", round(median(sitep), 3)))
       }
@@ -152,7 +152,7 @@ bct.pval <- function(peaks, info, PLOT = TRUE, PDF = FALSE, csv = FALSE, t = "",
              probability = F, breaks = 20)
         abline(v = median(timep), lty = 2, col = "red")
         if(dens){
-          lines(density(timep)*20, col = 'blue', lty = 1, lwd = 2)
+          lines(density(timep), col = 'blue', lty = 1, lwd = 2)
         }
         legend(x = 'topright', legend = paste("median: ", round(median(timep), 3)))
       }
@@ -173,7 +173,7 @@ bct.pval <- function(peaks, info, PLOT = TRUE, PDF = FALSE, csv = FALSE, t = "",
                probability = F, breaks = 20)
           abline(v = median(allpadjcb$sitep), lty = 2, col = "red")
           if(dens){
-            lines(density(allpadjcb$sitep)*20, col = 'blue', lty = 1, lwd = 2)
+            lines(density(allpadjcb$sitep), col = 'blue', lty = 1, lwd = 2)
           }
           legend(x = 'topright', legend = paste("median: ", round(median(alladj$sitep), 3)))
         }
@@ -182,7 +182,7 @@ bct.pval <- function(peaks, info, PLOT = TRUE, PDF = FALSE, csv = FALSE, t = "",
                probability = F, breaks = 20)
           abline(v = median(allpadjcb$timep), lty = 2, col = "red")
           if(dens){
-            lines(density(allpadjcb$timep)*20, col = 'blue', lty = 1, lwd = 2)
+            lines(density(allpadjcb$timep), col = 'blue', lty = 1, lwd = 2)
           }
           legend(x = 'topright', legend = paste("median: ", round(median(alladj$timep), 3)))
         }
@@ -197,4 +197,3 @@ bct.pval <- function(peaks, info, PLOT = TRUE, PDF = FALSE, csv = FALSE, t = "",
   cat("\nComputations complete!\n")
   return(p.ALL)
 }
-
