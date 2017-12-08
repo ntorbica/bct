@@ -23,7 +23,6 @@
 bct.pval <- function(peaks, info, PLOT = TRUE, PDF = FALSE, csv = FALSE, t = "", adj = F,
                      plotn = c("Group", "Batch", "SeqNr", "All"), dens = T) {
 
-  cat("Preparing data...\n\n")
 
   n.p <- ncol(peaks)
 
@@ -39,13 +38,19 @@ bct.pval <- function(peaks, info, PLOT = TRUE, PDF = FALSE, csv = FALSE, t = "",
   for (i in 1:n.p) {
     crudelm <- aov(peaks[, i] ~ factor(info$SCode) + info$Batch + info$SeqNr)
     viasumunl <- unlist(summary(crudelm))
-    groupp[i - 3] <- viasumunl[["Pr(>F)1"]]
-    sitep[i - 3] <- viasumunl[["Pr(>F)2"]]
-    timep[i - 3] <- viasumunl[["Pr(>F)3"]]
+    if(plotn == 'Group' | plotn == 'All'){
+      groupp[i - 3] <- viasumunl[["Pr(>F)1"]]
+    }
+    if(plotn == 'Batch' | plotn == 'All'){
+      sitep[i - 3] <- viasumunl[["Pr(>F)2"]]
+    }
+    if(plotn == 'SeqNr' | plotn == 'All'){
+      timep[i - 3] <- viasumunl[["Pr(>F)3"]]
+    }
   }
 
   p.abundances <- matrix()
-  p.abundances <- cbind(patientp, sitep, timep)
+  p.abundances <- cbind(groupp, sitep, timep)
 
   if(adj){
     allpadjcb <- as.data.frame(apply(p.abundances, 2, p.adjust, method = "fdr", n = nrow(p.abundances)))
@@ -59,103 +64,127 @@ bct.pval <- function(peaks, info, PLOT = TRUE, PDF = FALSE, csv = FALSE, t = "",
       pdfname <- readline("Please enter a name for the plotfile, ending in .pdf:\n\n")
 
       pdf(pdfname)
-      hist(patientp, main = paste(t, "Group"), xlab = "P-Value", cex = 3, xlim = c(0,1), probability = T)
-      abline(v = median(patientp), lty = 3, col = "red")
+      hist(groupp, main = paste(t, "Group"), xlab = "P-Value", cex = 3, xlim = c(0,1),
+           probability = F, breaks = 20)
+      abline(v = median(groupp), lty = 3, col = "red")
       if(dens){
-        lines(density(patientp), col = 'blue', lty = 1, lwd = 2)
+        lines(density(groupp)*20, col = 'blue', lty = 1, lwd = 2)
       }
+      legend(x = 'topright', legend(paste("median: ", round(median(groupp), 3))))
 
 
-      hist(sitep, main = paste(t, "Batch"), xlab = "P-Value", cex = 3, xlim = c(0,1), probability = T)
+      hist(sitep, main = paste(t, "Batch"), xlab = "P-Value", cex = 3, xlim = c(0,1),
+           probability = F, breaks = 20)
       abline(v = median(sitep), lty = 3, col = "red")
       if(dens){
-        lines(density(sitep), col = 'blue', lty = 1, lwd = 2)
+        lines(density(sitep)*20, col = 'blue', lty = 1, lwd = 2)
       }
+      legend(x = 'topright', legend(paste("median: ", round(median(sitep), 3))))
 
 
-      hist(timep, main = paste(t, "Order"), xlab = "P-Value", cex = 3, xlim = c(0,1), probability = T)
+      hist(timep, main = paste(t, "Order"), xlab = "P-Value", cex = 3, xlim = c(0,1),
+           probability = F, breaks = 20)
       abline(v = median(timep), lty = 3, col = "red")
       if(dens){
-        lines(density(timep), col = 'blue', lty = 1, lwd = 2)
+        lines(density(timep)*20, col = 'blue', lty = 1, lwd = 2)
       }
+      legend(x = 'topright', legend(paste("median: ", round(median(timep), 3))))
 
 
 
 
       if(adj){
-        hist(allpadjcb$patientp, main = paste(t, "Group adj"), xlab = "P-Value", cex = 3, xlim = c(0,1), probability = T)
-        abline(v = median(allpadjcb$patientp), lty = 3, col = "red")
+        hist(allpadjcb$groupp, main = paste(t, "Group adj"), xlab = "P-Value", cex = 3, xlim = c(0,1),
+             probability = F, breaks = 20)
+        abline(v = median(allpadjcb$groupp), lty = 3, col = "red")
         if(dens){
-          lines(density(allpadjcb$patientp), col = 'blue', lty = 1, lwd = 2)
+          lines(density(allpadjcb$groupp)*20, col = 'blue', lty = 1, lwd = 2)
         }
+        legend(x = 'topright', legend = paste("median: ", round(median(alladj$groupp), 3)))
 
 
-        hist(allpadjcb$sitep, main = paste(t, "Batch adj"), xlab = "P-Value", cex = 3, xlim = c(0,1), probability = T)
+        hist(allpadjcb$sitep, main = paste(t, "Batch adj"), xlab = "P-Value", cex = 3, xlim = c(0,1),
+             probability = F, breaks = 20)
         abline(v = median(allpadjcb$sitep), lty = 3, col = "red")
         if(dens){
-          lines(density(allpadjcb$sitep), col = 'blue', lty = 1, lwd = 2)
+          lines(density(allpadjcb$sitep)*20, col = 'blue', lty = 1, lwd = 2)
         }
+        legend(x = 'topright', legend = paste("median: ", round(median(alladj$sitep), 3)))
 
 
-        hist(allpadjcb$timep, main = paste(t, "Order adj"), xlab = "P-Value", cex = 3, xlim = c(0,1), probability = T)
-        abline(v = median(allpadjcb$timep), lty = 3, col = "red")
+        hist(allpadjcb$timep, main = paste(t, "Order adj"), xlab = "P-Value", cex = 3, xlim = c(0,1),
+             probability = F, breaks = 20)
+        abline(v = median(allpadjcb$timep)*20, lty = 3, col = "red")
         if(dens){
-          lines(density(allpadjcb$timep), col = 'blue', lty = 1, lwd = 2)
+          lines(density(allpadjcb$timep)*20, col = 'blue', lty = 1, lwd = 2)
         }
+        legend(x = 'topright', legend = paste("median: ", round(median(alladj$timep), 3)))
       }
 
       suppressMessages(dev.off())
 
     } else {
-      # par(mar = c(4, 5.5, 5, 3), cex.lab = 1.6, cex.axis = 1.3, cex.main = 2)
+      # par(oma = c(4, 5.5, 5, 3), cex.lab = 1.6, cex.axis = 1.3, cex.main = 2)
 
       if(plotn == 'Group' | plotn == 'All'){
-        hist(patientp, main = paste(t, "Group"), xlab = "P-Value", cex = 3, breaks = 15, xlim = c(0,1), probability = T)
-        abline(v = median(patientp), lty = 2, col = "red")
+        hist(groupp, main = paste(t, "Group"), xlab = "P-Value", cex = 3, xlim = c(0,1),
+             probability = F, breaks = 20)
+        abline(v = median(groupp), lty = 2, col = "red")
         if(dens){
-          d <- density(patientp)
+          d <- density(groupp)*20
           lines(d, col = 'blue', lty = 1, lwd = 2)
         }
+        legend(x = 'topright', legend = paste("median: ", round(median(groupp), 3)))
       }
 
       if(plotn == 'Batch' | plotn == 'All'){
-        hist(sitep, main = paste(t, "Batch"), xlab = "P-Value", cex = 3, breaks = 15, xlim = c(0,1), probability = T)
+        hist(sitep, main = paste(t, "Batch"), xlab = "P-Value", cex = 3, xlim = c(0,1),
+             probability = F, breaks = 20)
         abline(v = median(sitep), lty = 2, col = "red")
         if(dens){
-          lines(density(sitep), col = 'blue', lty = 1, lwd = 2)
+          lines(density(sitep)*20, col = 'blue', lty = 1, lwd = 2)
         }
+        legend(x = 'topright', legend = paste("median: ", round(median(sitep), 3)))
       }
 
       if(plotn == 'SeqNr' | plotn == 'All'){
-        hist(timep, main = paste(t, "Order"), xlab = "P-Value", cex = 3, breaks = 15, xlim = c(0,1), probability = T)
+        hist(timep, main = paste(t, "Order"), xlab = "P-Value", cex = 3, xlim = c(0,1),
+             probability = F, breaks = 20)
         abline(v = median(timep), lty = 2, col = "red")
         if(dens){
-          lines(density(timep), col = 'blue', lty = 1, lwd = 2)
+          lines(density(timep)*20, col = 'blue', lty = 1, lwd = 2)
         }
+        legend(x = 'topright', legend = paste("median: ", round(median(timep), 3)))
       }
 
       if(adj){
         # par(mfrow=c(1,3))
         if(plotn == 'Group' | plotn == 'All'){
-          hist(allpadjcb$patientp, main = paste(t, "Group adj"), xlab = "P-Value", cex = 3, breaks = 15, xlim = c(0,1), probability = T)
-          abline(v = median(allpadjcb$patientp), lty = 2, col = "red")
+          hist(allpadjcb$groupp, main = paste(t, "Group adj"), xlab = "P-Value", cex = 3, xlim = c(0,1),
+               probability = F, breaks = 20)
+          abline(v = median(allpadjcb$groupp), lty = 2, col = "red")
           if(dens){
-            lines(density(allpadjcb$patientp), col = 'blue', lty = 1, lwd = 2)
+            lines(density(allpadjcb$groupp), col = 'blue', lty = 1, lwd = 2)
           }
+          legend(x = 'topright', legend = paste("median: ", round(median(alladj$groupp), 3)))
         }
         if(plotn == 'Batch' | plotn == 'All'){
-          hist(allpadjcb$sitep, main = paste(t, "Batch adj"), xlab = "P-Value", cex = 3, breaks = 15, xlim = c(0,1), probability = T)
+          hist(allpadjcb$sitep, main = paste(t, "Batch adj"), xlab = "P-Value", cex = 3, xlim = c(0,1),
+               probability = F, breaks = 20)
           abline(v = median(allpadjcb$sitep), lty = 2, col = "red")
           if(dens){
-            lines(density(allpadjcb$sitep), col = 'blue', lty = 1, lwd = 2)
+            lines(density(allpadjcb$sitep)*20, col = 'blue', lty = 1, lwd = 2)
           }
+          legend(x = 'topright', legend = paste("median: ", round(median(alladj$sitep), 3)))
         }
         if(plotn == 'SeqNr' | plotn == 'All'){
-          hist(allpadjcb$timep, main = paste(t, "Order adj"), xlab = "P-Value", cex = 3, breaks = 15, xlim = c(0,1), probability = T)
+          hist(allpadjcb$timep, main = paste(t, "Order adj"), xlab = "P-Value", cex = 3, xlim = c(0,1),
+               probability = F, breaks = 20)
           abline(v = median(allpadjcb$timep), lty = 2, col = "red")
           if(dens){
-            lines(density(allpadjcb$timep), col = 'blue', lty = 1, lwd = 2)
+            lines(density(allpadjcb$timep)*20, col = 'blue', lty = 1, lwd = 2)
           }
+          legend(x = 'topright', legend = paste("median: ", round(median(alladj$timep), 3)))
         }
       }
     }
