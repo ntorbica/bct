@@ -70,7 +70,11 @@ bct.pval <- function(peaks, info, PLOT = TRUE, PDF = FALSE, csv = FALSE, t = "",
       if(dens){
         lines(density(groupp), col = 'blue', lty = 1, lwd = 2)
       }
-      legend(x = 'topright', legend(paste("median: ", round(median(groupp), 3))))
+      if(round(median(groupp) > 0.5)){
+        legend(x = 'topleft', legend = paste("median: ", round(median(groupp), 3)), bty = 'n')
+      } else {
+        legend(x = 'topright', legend = paste("median: ", round(median(groupp), 3)), bty = 'n')
+      }
 
 
       hist(sitep, main = paste(t, "Batch"), xlab = "P-Value", cex = 3, xlim = c(0,1),
@@ -79,7 +83,13 @@ bct.pval <- function(peaks, info, PLOT = TRUE, PDF = FALSE, csv = FALSE, t = "",
       if(dens){
         lines(density(sitep)*20, col = 'blue', lty = 1, lwd = 2)
       }
-      legend(x = 'topright', legend(paste("median: ", round(median(sitep), 3))))
+
+      if(round(median(sitep) > 0.5)){
+        legend(x = 'topleft', legend = paste("median: ", round(median(sitep), 3)), bty = 'n')
+      } else {
+        legend(x = 'topright', legend = paste("median: ", round(median(sitep), 3)), bty = 'n')
+      }
+
 
 
       hist(timep, main = paste(t, "Order"), xlab = "P-Value", cex = 3, xlim = c(0,1),
@@ -88,9 +98,11 @@ bct.pval <- function(peaks, info, PLOT = TRUE, PDF = FALSE, csv = FALSE, t = "",
       if(dens){
         lines(density(timep), col = 'blue', lty = 1, lwd = 2)
       }
-      legend(x = 'topright', legend(paste("median: ", round(median(timep), 3))))
-
-
+      if(round(median(timep) > 0.5)){
+        legend(x = 'topleft', legend = paste("median: ", round(median(timep), 3)), bty = 'n')
+      } else {
+        legend(x = 'topright', legend = paste("median: ", round(median(timep), 3)), bty = 'n')
+      }
 
 
       if(adj){
@@ -100,8 +112,11 @@ bct.pval <- function(peaks, info, PLOT = TRUE, PDF = FALSE, csv = FALSE, t = "",
         if(dens){
           lines(density(allpadjcb$groupp), col = 'blue', lty = 1, lwd = 2)
         }
-        legend(x = 'topright', legend = paste("median: ", round(median(alladj$groupp), 3)))
-
+        if(round(median(sitep) > 0.5)){
+          legend(x = 'topleft', legend = paste("median: ", round(median(allpadjcb$groupp), 3)), bty = 'n')
+        } else {
+          legend(x = 'topright', legend = paste("median: ", round(median(allpadjcb$groupp), 3)), bty = 'n')
+        }
 
         hist(allpadjcb$sitep, main = paste(t, "Batch adj"), xlab = "P-Value", cex = 3, xlim = c(0,1),
              probability = F, breaks = 20)
@@ -109,8 +124,11 @@ bct.pval <- function(peaks, info, PLOT = TRUE, PDF = FALSE, csv = FALSE, t = "",
         if(dens){
           lines(density(allpadjcb$sitep), col = 'blue', lty = 1, lwd = 2)
         }
-        legend(x = 'topright', legend = paste("median: ", round(median(alladj$sitep), 3)))
-
+        if(round(median(allpadjcb$sitep) > 0.5)){
+          legend(x = 'topleft', legend = paste("median: ", round(median(allpadjcb$sitep), 3)), bty = 'n')
+        } else {
+          legend(x = 'topright', legend = paste("median: ", round(median(allpadjcb$sitep), 3)), bty = 'n')
+        }
 
         hist(allpadjcb$timep, main = paste(t, "Order adj"), xlab = "P-Value", cex = 3, xlim = c(0,1),
              probability = F, breaks = 20)
@@ -118,7 +136,11 @@ bct.pval <- function(peaks, info, PLOT = TRUE, PDF = FALSE, csv = FALSE, t = "",
         if(dens){
           lines(density(allpadjcb$timep), col = 'blue', lty = 1, lwd = 2)
         }
-        legend(x = 'topright', legend = paste("median: ", round(median(alladj$timep), 3)))
+        if(round(median(sitep) > 0.5)){
+          legend(x = 'topleft', legend = paste("median: ", round(median(allpadjcb$timep), 3)), bty = 'n')
+        } else {
+          legend(x = 'topright', legend = paste("median: ", round(median(allpadjcb$timep), 3)), bty = 'n')
+        }
       }
 
       suppressMessages(dev.off())
@@ -134,7 +156,11 @@ bct.pval <- function(peaks, info, PLOT = TRUE, PDF = FALSE, csv = FALSE, t = "",
           d <- density(groupp)
           lines(d, col = 'blue', lty = 1, lwd = 2)
         }
-        legend(x = 'topright', legend = paste("median: ", round(median(groupp), 3)))
+        if(round(median(groupp) > 0.5)){
+          legend(x = 'topleft', legend = paste("median: ", round(median(groupp), 3)), bty = 'n')
+        } else {
+          legend(x = 'topright', legend = paste("median: ", round(median(groupp), 3)), bty = 'n')
+        }
       }
 
       if(plotn == 'Batch' | plotn == 'All'){
@@ -144,7 +170,11 @@ bct.pval <- function(peaks, info, PLOT = TRUE, PDF = FALSE, csv = FALSE, t = "",
         if(dens){
           lines(density(sitep), col = 'blue', lty = 1, lwd = 2)
         }
-        legend(x = 'topright', legend = paste("median: ", round(median(sitep), 3)))
+        if(round(median(sitep) > 0.5)){
+          legend(x = 'topleft', legend = paste("median: ", round(median(sitep), 3)), bty = 'n')
+        } else {
+          legend(x = 'topright', legend = paste("median: ", round(median(sitep), 3)), bty = 'n')
+        }
       }
 
       if(plotn == 'SeqNr' | plotn == 'All'){
@@ -154,7 +184,11 @@ bct.pval <- function(peaks, info, PLOT = TRUE, PDF = FALSE, csv = FALSE, t = "",
         if(dens){
           lines(density(timep), col = 'blue', lty = 1, lwd = 2)
         }
-        legend(x = 'topright', legend = paste("median: ", round(median(timep), 3)))
+        if(round(median(sitep) > 0.5)){
+          legend(x = 'topleft', legend = paste("median: ", round(median(timep), 3)), bty = 'n')
+        } else {
+          legend(x = 'topright', legend = paste("median: ", round(median(timep), 3)), bty = 'n')
+        }
       }
 
       if(adj){
@@ -166,7 +200,11 @@ bct.pval <- function(peaks, info, PLOT = TRUE, PDF = FALSE, csv = FALSE, t = "",
           if(dens){
             lines(density(allpadjcb$groupp), col = 'blue', lty = 1, lwd = 2)
           }
-          legend(x = 'topright', legend = paste("median: ", round(median(alladj$groupp), 3)))
+          if(round(median(sitep) > 0.5)){
+            legend(x = 'topleft', legend = paste("median: ", round(median(allpadjcb$groupp), 3)), bty = 'n')
+          } else {
+            legend(x = 'topright', legend = paste("median: ", round(median(allpadjcb$groupp), 3)), bty = 'n')
+          }
         }
         if(plotn == 'Batch' | plotn == 'All'){
           hist(allpadjcb$sitep, main = paste(t, "Batch adj"), xlab = "P-Value", cex = 3, xlim = c(0,1),
@@ -175,7 +213,11 @@ bct.pval <- function(peaks, info, PLOT = TRUE, PDF = FALSE, csv = FALSE, t = "",
           if(dens){
             lines(density(allpadjcb$sitep), col = 'blue', lty = 1, lwd = 2)
           }
-          legend(x = 'topright', legend = paste("median: ", round(median(alladj$sitep), 3)))
+          if(round(median(allpadjcb$sitep) > 0.5)){
+            legend(x = 'topleft', legend = paste("median: ", round(median(allpadjcb$sitep), 3)), bty = 'n')
+          } else {
+            legend(x = 'topright', legend = paste("median: ", round(median(allpadjcb$sitep), 3)), bty = 'n')
+          }
         }
         if(plotn == 'SeqNr' | plotn == 'All'){
           hist(allpadjcb$timep, main = paste(t, "Order adj"), xlab = "P-Value", cex = 3, xlim = c(0,1),
@@ -184,7 +226,11 @@ bct.pval <- function(peaks, info, PLOT = TRUE, PDF = FALSE, csv = FALSE, t = "",
           if(dens){
             lines(density(allpadjcb$timep), col = 'blue', lty = 1, lwd = 2)
           }
-          legend(x = 'topright', legend = paste("median: ", round(median(alladj$timep), 3)))
+          if(round(median(allpadjcb$timep) > 0.5)){
+            legend(x = 'topleft', legend = paste("median: ", round(median(allpadjcb$timep), 3)), bty = 'n')
+          } else {
+            legend(x = 'topright', legend = paste("median: ", round(median(allpadjcb$timep), 3)), bty = 'n')
+          }
         }
       }
     }
@@ -194,7 +240,6 @@ bct.pval <- function(peaks, info, PLOT = TRUE, PDF = FALSE, csv = FALSE, t = "",
     csvname <- readline("Please enter a name for the table file, ending in .csv:\n\n")
     write.csv(p.ALL, csvname)
   }
-
   return(p.ALL)
 }
 
