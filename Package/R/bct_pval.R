@@ -194,7 +194,7 @@ bct.pval <- function(peaks, info, PLOT = TRUE, PDF = FALSE, csv = FALSE, t = "",
     csvname <- readline("Please enter a name for the table file, ending in .csv:\n\n")
     write.csv(p.ALL, csvname)
   }
-  cat("\nComputations complete!\n")
+
   return(p.ALL)
 }
 
