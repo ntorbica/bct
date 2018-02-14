@@ -202,13 +202,6 @@ bct.in.args <- function(){
     tkgrid(Scb, columnspan = 1, sticky = 'w')
     tkgrid(tk2label(tt$env$main$top$fmt$t, text = ''))
 
-    Pb <- tk2checkbutton(tt$env$main$top$fmt$t, text = 'Save feature normalization plots:')
-    PbVal <- tclVar("0")
-    tkconfigure(Pb, variable = PbVal)
-
-    tkgrid(Pb, columnspan = 1, sticky = 'w')
-    tkgrid(tk2label(tt$env$main$top$fmt$t, text = ''))
-
 
 #####
     bn <- tclVar("c('Batch1', 'Batch2')")
